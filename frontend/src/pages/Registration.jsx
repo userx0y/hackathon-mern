@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { API_BASE } from "./config";
+import { API_BASE } from "../config";
 import posterFile from '../assets/space_poster.jpeg';
 import VanillaTilt from 'vanilla-tilt';
 import Button from '../Button';

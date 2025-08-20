@@ -11,7 +11,7 @@ const NavBar = () => {
     <>
     <nav className="navbar navbar-expand-lg" style={{backgroundColor: 'black'}}>
         <div className="container-fluid">
-            <a className="navbar-brand text-white" href="#">Web-App</a>
+            <a className="navbar-brand text-white" href="#">YearBook</a>
             <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
             </button>
@@ -19,6 +19,9 @@ const NavBar = () => {
               <ul className="navbar-nav w-100">
                 <li className="nav-item">
                   <NavLink className="nav-link text-white" aria-current="page" to='/home'>Home</NavLink>
+                </li>
+                <li className="nav-item">
+                  <NavLink className="nav-link text-white" aria-current="page" to='/dashboard'>Dashboard</NavLink>
                 </li>
                 <li className="nav-item">
                   <NavLink className="nav-link text-white" aria-current="page" to='/about'>About</NavLink>
