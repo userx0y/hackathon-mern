@@ -8,7 +8,8 @@ dotenv.config();
 const app = express();
 app.use(cors());
 app.use(express.json());
-mongoose.connect('mongodb://localhost:27017/hackathon_db').then(()=>console.log('Connected to Database!!!')).catch((err)=> console.log('DB Error', err));
+// mongoose.connect('mongodb://localhost:27017/hackathon_db').then(()=>console.log('Connected to Database!!!')).catch((err)=> console.log('DB Error', err));
+mongoose.connect(process.env.MONGO_URL).then(()=>console.log('Connected to Database!!!')).catch((err)=> console.log('DB Error', err));
 //model
 const userSchema = mongoose.Schema({
     name : String,
@@ -61,7 +62,7 @@ app.post("/login", async (req, res)=>{
         } else{
             return res.send({"status": "failed", "message": "Invalid email or password ❌"});
         };
-        say.speak("Welcome Sameer","Microsoft Zira Desktop")
+        // say.speak("Welcome Sameer","Microsoft Zira Desktop")
         return res.send({"status": "success", "message": "Login successful ✅"});
     } else{
         return res.send({"status": "failed", "message": "All fields are required❗"});
