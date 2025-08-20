@@ -1,13 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
-// Google Fonts import: Add this to your public/index.html <head>: 
-// <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
+const PAGE_TITLE = "dashboard";
 
 const Dashboard = () => {
   const [elements, setElements] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [formType, setFormType] = useState(""); // "quote" or "image"
   const [inputValue, setInputValue] = useState("");
+
+  // Load dashboard elements from backend on mount
+  useEffect(() => {
+    axios.get(`/api/page/${PAGE_TITLE}`)
+      .then(res => {
+        if (res.data?.page?.elements) setElements(res.data.page.elements);
+      })
+      .catch(() => setElements([]));
+  }, []);
+
+  // Save elements to backend
+  const saveElements = (newElements) => {
+    axios.post('/api/page', { title: PAGE_TITLE, elements: newElements })
+      .catch(err => console.error("Error saving elements:", err));
+  };
 
   const openForm = (type) => {
     setFormType(type);
@@ -18,11 +33,15 @@ const Dashboard = () => {
   const handleFormSubmit = (e) => {
     e.preventDefault();
     if (!inputValue) return;
+
+    let newElements;
     if (formType === "quote") {
-      setElements([...elements, { type: 'quote', content: inputValue, x: 80, y: 80 }]);
-    } else if (formType === "image") {
-      setElements([...elements, { type: 'image', src: inputValue, x: 80, y: 80 }]);
+      newElements = [...elements, { type: 'quote', content: inputValue, x: 80, y: 80 }];
+    } else {
+      newElements = [...elements, { type: 'image', src: inputValue, x: 80, y: 80 }];
     }
+    setElements(newElements);
+    saveElements(newElements);
     setShowForm(false);
   };
 
@@ -31,10 +50,10 @@ const Dashboard = () => {
     newElements[index].x = e.clientX - 100;
     newElements[index].y = e.clientY - 40;
     setElements(newElements);
+    saveElements(newElements);
   };
 
-  // --- STYLES ---
-
+  // Styles
   const sidebarStyle = {
     width: '250px',
     padding: '32px 20px',
@@ -133,31 +152,29 @@ const Dashboard = () => {
     fontFamily: '"Montserrat", sans-serif'
   };
 
-  // --- UI ---
-
   return (
-    <div style={{ display: 'flex', height: '100vh', fontFamily: '"Montserrat", sans-serif', background: 'linear-gradient(90deg, #e9f1fa 0%, #f8f7fc 100%)' }}>
+    <div style={{ display: 'flex', height: '100vh', backgroundColor: '#282828', fontFamily: '"Montserrat", sans-serif', background: 'linear-gradient(90deg, #e9f1fa 0%, #f8f7fc 100%)' }}>
       <div style={sidebarStyle}>
-        <h2 style={{fontWeight: 700, color: "#3b4fcb", marginBottom:'18px', letterSpacing:'.06em',fontSize:'1.45rem'}}>Dashboard</h2>
-        <button 
-          style={buttonStyle} 
-          onMouseDown={e => e.target.style.transform='scale(0.96)'}
-          onMouseUp={e => e.target.style.transform='scale(1)'}
+        <h2 style={{ fontWeight: 700, color: "#3b4fcb", marginBottom: '18px', letterSpacing: '.06em', fontSize: '1.45rem' }}>Dashboard</h2>
+        <button
+          style={buttonStyle}
+          onMouseDown={e => e.target.style.transform = 'scale(0.96)'}
+          onMouseUp={e => e.target.style.transform = 'scale(1)'}
           onClick={() => openForm("quote")}
         >Add Quote</button>
-        <button 
-          style={{...buttonStyle, background:"linear-gradient(90deg, #ee5773 0%, #ffad66 100%)"}}
-          onMouseDown={e => e.target.style.transform='scale(0.96)'}
-          onMouseUp={e => e.target.style.transform='scale(1)'}
+        <button
+          style={{ ...buttonStyle, background: "linear-gradient(90deg, #ee5773 0%, #ffad66 100%)" }}
+          onMouseDown={e => e.target.style.transform = 'scale(0.96)'}
+          onMouseUp={e => e.target.style.transform = 'scale(1)'}
           onClick={() => openForm("image")}
         >Add Image</button>
         <div style={{
           marginTop: 'auto',
-          fontSize:'0.97rem',
+          fontSize: '0.97rem',
           color: '#637085',
-          textAlign:'center',
+          textAlign: 'center',
         }}>
-          <span style={{opacity:0.75}}>Drag and move cards freely 🎨</span>
+          <span style={{ opacity: 0.75 }}>Drag and move cards freely 🎨</span>
         </div>
       </div>
       <div style={canvasStyle}>
@@ -168,23 +185,23 @@ const Dashboard = () => {
         }
         {elements.map((el, index) =>
           el.type === 'quote' ? (
-            <div 
-              key={index} 
+            <div
+              key={index}
               style={quoteStyle(el.x, el.y)}
               onMouseDown={e => {
                 e.preventDefault();
                 e.currentTarget.style.boxShadow = '0 7px 32px 0 rgba(46,68,128,0.33)';
-                e.currentTarget.style.transform='scale(1.03)';
+                e.currentTarget.style.transform = 'scale(1.03)';
                 const onMouseMove = eMove => handleDrag(eMove, index);
                 window.addEventListener('mousemove', onMouseMove);
                 window.addEventListener('mouseup', () => {
                   window.removeEventListener('mousemove', onMouseMove);
                   e.currentTarget.style.boxShadow = quoteStyle(el.x, el.y).boxShadow;
-                  e.currentTarget.style.transform='scale(1)';
+                  e.currentTarget.style.transform = 'scale(1)';
                 }, { once: true });
               }}
             >
-              <span style={{fontStyle:"italic", color:"#4559cc"}}>“</span>
+              <span style={{ fontStyle: "italic", color: "#4559cc" }}>“</span>
               {el.content}
             </div>
           ) : (
@@ -196,26 +213,25 @@ const Dashboard = () => {
               onMouseDown={e => {
                 e.preventDefault();
                 e.target.style.boxShadow = "0 13px 44px 0 rgba(43,60,156,0.23)";
-                e.target.style.transform='scale(1.08)';
+                e.target.style.transform = 'scale(1.08)';
                 const onMouseMove = eMove => handleDrag(eMove, index);
                 window.addEventListener('mousemove', onMouseMove);
                 window.addEventListener('mouseup', () => {
                   window.removeEventListener('mousemove', onMouseMove);
                   e.target.style.boxShadow = imageStyle(el.x, el.y).boxShadow;
-                  e.target.style.transform='scale(1)';
+                  e.target.style.transform = 'scale(1)';
                 }, { once: true });
               }}
-              onMouseEnter={e => e.target.style.transform='scale(1.1)'}
-              onMouseLeave={e => e.target.style.transform='scale(1)'}
+              onMouseEnter={e => e.target.style.transform = 'scale(1.1)'}
+              onMouseLeave={e => e.target.style.transform = 'scale(1)'}
             />
           )
         )}
       </div>
-      {/* Popup Form */}
       {showForm && (
         <div style={formOverlayStyle} onClick={() => setShowForm(false)}>
           <form style={formStyle} onClick={e => e.stopPropagation()} onSubmit={handleFormSubmit}>
-            <h3 style={{color:'#504fcc',fontWeight:700,marginBottom:'18px',fontSize:'1.15rem'}}>
+            <h3 style={{ color: '#504fcc', fontWeight: 700, marginBottom: '18px', fontSize: '1.15rem' }}>
               {formType === 'quote' ? 'Add Quote' : 'Add Image URL'}
             </h3>
             <input
@@ -234,13 +250,13 @@ const Dashboard = () => {
                 color: '#42517d'
               }}
             />
-            <button 
-              type="submit" 
+            <button
+              type="submit"
               style={{
                 ...buttonStyle,
                 width: '100%',
-                boxShadow:'none',
-                background:'linear-gradient(90deg, #5560f6 0%, #3ebee8 100%)'
+                boxShadow: 'none',
+                background: 'linear-gradient(90deg, #5560f6 0%, #3ebee8 100%)'
               }}
             >Add</button>
           </form>
