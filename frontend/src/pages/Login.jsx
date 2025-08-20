@@ -129,7 +129,7 @@ const Login = () => {
               value={form.email} 
               name='email' 
               onChange={handleOnChange} 
-              required
+              
             />
             <input 
               type="password" 
@@ -138,7 +138,7 @@ const Login = () => {
               value={form.password} 
               name='password' 
               onChange={handleOnChange} 
-              required
+              
             />
             <span id='msgBox'></span>
             <br />

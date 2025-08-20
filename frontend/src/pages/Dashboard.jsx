@@ -9,20 +9,21 @@ const Dashboard = () => {
   const [formType, setFormType] = useState(""); // "quote" or "image"
   const [inputValue, setInputValue] = useState("");
 
-  // Load dashboard elements from backend on mount
-  useEffect(() => {
-    axios.get(`/api/page/${PAGE_TITLE}`)
-      .then(res => {
-        if (res.data?.page?.elements) setElements(res.data.page.elements);
-      })
-      .catch(() => setElements([]));
-  }, []);
+// Load dashboard elements from backend on mount
+useEffect(() => {
+  axios.get(`http://localhost:5000/api/page/${PAGE_TITLE}`)
+    .then(res => {
+      if (res.data?.page?.elements) setElements(res.data.page.elements);
+    })
+    .catch(() => setElements([]));
+}, []); 
 
-  // Save elements to backend
-  const saveElements = (newElements) => {
-    axios.post('/api/page', { title: PAGE_TITLE, elements: newElements })
-      .catch(err => console.error("Error saving elements:", err));
-  };
+
+// Save elements to backend
+const saveElements = (newElements) => {
+  axios.post('http://localhost:5000/api/page', { title: PAGE_TITLE, elements: newElements })
+    .catch(err => console.error("Error saving elements:", err));
+};
 
   const openForm = (type) => {
     setFormType(type);
