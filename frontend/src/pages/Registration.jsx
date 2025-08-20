@@ -22,7 +22,8 @@ const Registration = () => {
     e.preventDefault();
     console.log(Form)
     console.log('hahaha');
-    fetch(`${API_BASE}/register`, {
+    // fetch(`${API_BASE}/register`, {
+    fetch('http://localhost:5000/register', {
       method : "POST",
       headers : { "Content-Type" : "application/json" },
       body : JSON.stringify(Form)
@@ -35,7 +36,7 @@ const Registration = () => {
       }else if(data.status == 'failed'){
         getMsgBox.style.color = "red";
         getMsgBox.style.fontWeight = "bolder";
-        getMsgBox.innerHTML = data.message;
+        getMsgBox.innerHTML = data.message; 
       };
       setTimeout(()=>{
         getMsgBox.innerHTML = "";

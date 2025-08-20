@@ -6,6 +6,7 @@ import Lottie from "lottie-react";
 import Cat from "../assets/Cat_Movement.json"
 import Typed from "typed.js";
 const Home = () => {
+  const username = localStorage.getItem("username") || "Guest";
   const style = {
     fontSize : '60px',
     fontFamily : 'Montserrat',
@@ -27,7 +28,7 @@ const Home = () => {
   return (
     <>
     <div className="container-fluid gap-4" style={{display: 'flex', justifyContent: 'center', alignContent: 'center'}}>
-      <h1 className="pt-5" style={{fontSize: '80px', fontFamily: "'Montserrat'"}} data-aos="fade-in">Welcome Sameer</h1>
+      <h1 className="pt-5" style={{fontSize: '80px', fontFamily: "'Montserrat'"}} data-aos="fade-in">Welcome User</h1>
     </div>
     <br />
     <div className="container">

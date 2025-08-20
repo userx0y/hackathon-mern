@@ -30,6 +30,8 @@ const Login = () => {
         getMsgBox.style.color = "green";
         getMsgBox.style.fontWeight = "bolder";
         getMsgBox.innerHTML = data.message;
+        localStorage.setItem("username", data.name);
+        localStorage.setItem("email", data.email);
         navigate('/home')
       }else if(data.status == 'failed'){
         getMsgBox.style.color = "red";
