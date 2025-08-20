@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { API_BASE } from "./config";
 import posterFile from '../assets/space_poster.jpeg';
 import VanillaTilt from 'vanilla-tilt';
 import Button from '../Button';
@@ -21,7 +22,7 @@ const Registration = () => {
     e.preventDefault();
     console.log(Form)
     console.log('hahaha');
-    fetch('http://localhost:5000/register', {
+    fetch(`${API_BASE}/register`, {
       method : "POST",
       headers : { "Content-Type" : "application/json" },
       body : JSON.stringify(Form)
