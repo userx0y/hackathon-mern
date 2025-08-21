@@ -3,17 +3,32 @@ import { Moon, Sun, LogOut } from "lucide-react";
 import { useEffect, useState } from "react";
 
 const NavBar = () => {
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(() => {
+    // Get dark mode preference from localStorage on initial load
+    const savedDarkMode = localStorage.getItem("darkMode");
+    return savedDarkMode ? JSON.parse(savedDarkMode) : false;
+  });
+  
   const navigate = useNavigate();
 
-  useEffect(()=>{
+  useEffect(() => {
+    // Apply dark mode styles
     document.body.style.backgroundColor = darkMode ? "#282828" : "white";
     document.body.style.color = darkMode ? "white" : "black";
-  },[darkMode]);
+    
+    // Save dark mode preference to localStorage
+    localStorage.setItem("darkMode", JSON.stringify(darkMode));
+  }, [darkMode]);
 
   const handleLogout = () => {
+    localStorage.removeItem("username");
     navigate('/login');
   };
+
+  const handleDark = () => {
+    setDarkMode(!darkMode);
+  };
+
   return (
     <nav className="navbar navbar-expand-lg" style={{backgroundColor: 'black'}}>
       <div className="container-fluid">
@@ -33,7 +48,7 @@ const NavBar = () => {
               <NavLink className="nav-link text-white" to='/about'>About</NavLink>
             </li>
             <li className="nav-item ms-auto d-flex align-items-center gap-2">
-              <button onClick={() => setDarkMode(!darkMode)} className="p-0" style={{ border: "none", background: "transparent" }}>
+              <button onClick={handleDark} className="p-0" style={{ border: "none", background: "transparent" }}>
                 {darkMode ? <Sun size={30} color="yellow" /> : <Moon size={30} color="pink" />}
               </button>
               <button onClick={handleLogout} className="btn btn-danger btn-sm d-flex align-items-center gap-1">
