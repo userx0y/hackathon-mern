@@ -28,9 +28,6 @@ const NavBar = () => {
               <NavLink className="nav-link text-white" to='/home'>Home</NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link text-white" to='/dashboard'>Dashboard</NavLink>
-            </li>
-            <li className="nav-item">
               <NavLink className="nav-link text-white" to='/about'>About</NavLink>
             </li>
             <li className="nav-item ms-auto d-flex align-items-center gap-2">

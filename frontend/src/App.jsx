@@ -5,9 +5,7 @@ import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import NavBar from "./components/NavBar";
 import About from "./pages/About";
-import Dashboard from "./pages/Dashboard";
 
-// Create a wrapper component that conditionally renders NavBar
 function AppContent() {
   const location = useLocation();
   const hideNavbarPaths = ["/", "/login"];
@@ -21,7 +19,6 @@ function AppContent() {
         <Route path="/login" element={<Login />} />
         <Route path="/home" element={<Home />} />
         <Route path="/about" element={<About />} />
-        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>
