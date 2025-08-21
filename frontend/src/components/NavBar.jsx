@@ -12,7 +12,6 @@ const NavBar = () => {
   },[darkMode]);
 
   const handleLogout = () => {
-    localStorage.removeItem("username");
     navigate('/login');
   };
   return (
@@ -26,6 +25,9 @@ const NavBar = () => {
           <ul className="navbar-nav w-100">
             <li className="nav-item">
               <NavLink className="nav-link text-white" to='/home'>Home</NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link text-white" to='/notes'>Notes</NavLink>
             </li>
             <li className="nav-item">
               <NavLink className="nav-link text-white" to='/about'>About</NavLink>

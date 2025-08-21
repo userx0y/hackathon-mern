@@ -8,9 +8,9 @@ const About = () => {
   return (
     <>
     <div className="container-fluid pt-5">
-        <h1 className="ps-5" data-aos="zoom-in" style={{fontFamily: "'Montserrat'", fontSize: '70px'}}>About us</h1>
+        <h1 className="ps-5" data-aos="fade-in" style={{fontFamily: "'Montserrat'", fontSize: '70px'}}>About us</h1>
         <div className="d-flex justify-content-start p-5">
-        <p style={{ textAlign: "justify", fontSize: '20px'}} data-aos="zoom-out">
+        <p style={{ textAlign: "justify", fontSize: '20px'}} data-aos="fade-out">
           A minimal notepad website. Write down your ideas, lists, and thoughts. No distractions, no complications.
         </p>
         </div>
