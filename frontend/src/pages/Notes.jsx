@@ -1,4 +1,10 @@
+import Aos from "aos";
+import 'aos/dist/aos.css'
+import { useEffect } from "react";
 const Notes = () => {
+    useEffect(()=>{
+        Aos.init({duration: 1000});
+    },[]);
   return (
     <>
     <div className="container-fluid pt-5">
