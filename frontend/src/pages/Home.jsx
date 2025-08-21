@@ -31,7 +31,7 @@ const Home = () => {
       <h1 className="pt-5" style={{fontSize: '50px', fontFamily: "'Montserrat'", color: '#4169e1'}} data-aos="fade-in">Welcome</h1>
     </div>
     <br />
-    <div className="container" style={{height: '200px'}}>
+    <div className="container" style={{height: '220px'}}>
       <span style={style} ref={typeRef}></span>
     </div>
     <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
