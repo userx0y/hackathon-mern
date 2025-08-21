@@ -18,7 +18,7 @@ const NavBar = () => {
   return (
     <nav className="navbar navbar-expand-lg" style={{backgroundColor: 'black'}}>
       <div className="container-fluid">
-        <a className="navbar-brand text-white" href="#">YearBook</a>
+        <a className="navbar-brand text-white" href="#">Notepad</a>
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
           <span className="navbar-toggler-icon"></span>
         </button>

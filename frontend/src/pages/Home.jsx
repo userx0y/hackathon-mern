@@ -8,30 +8,30 @@ import Typed from "typed.js";
 const Home = () => {
   const username = localStorage.getItem("username") || "Guest";
   const style = {
-    fontSize : '60px',
+    fontSize : '50px',
     fontFamily : 'Montserrat',
     color : '#ffc40c'
   };
 
   const catStyle = {
-    width : "50%"
+    maxWidth : "600px",
+    width : '80%'
   };
   const typeRef = useRef(null);
   useEffect(()=>{
     Aos.init({duration: 1000});
-    const typed = new Typed(typeRef.current,{strings: ["Hey","thanks for being here","This is our project", "Hmmm...",
-        "Hope you like it :)"], loop: true, typeSpeed: 60, backSpeed: 30});
+    const typed = new Typed(typeRef.current,{strings: ["Capture your ideas.", "Don't let them fade away."], loop: true, typeSpeed: 70, backSpeed: 30});
     return () => {
       typed.destroy();
     }
   }, []);
   return (
     <>
-    <div className="container-fluid gap-4" style={{display: 'flex', justifyContent: 'center', alignContent: 'center'}}>
-      <h1 className="pt-5" style={{fontSize: '80px', fontFamily: "'Montserrat'"}} data-aos="fade-in">Welcome User</h1>
+    <div className="container gap-4" style={{display: 'flex', justifyContent: 'center', alignContent: 'center'}}>
+      <h1 className="pt-5" style={{fontSize: '50px', fontFamily: "'Montserrat'", color: '#4169e1'}} data-aos="fade-in">Welcome</h1>
     </div>
     <br />
-    <div className="container">
+    <div className="container" style={{height: '190px'}}>
       <span style={style} ref={typeRef}></span>
     </div>
     <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
