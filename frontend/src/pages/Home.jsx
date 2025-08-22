@@ -18,7 +18,7 @@ const Home = () => {
       const second = splitted[1][0].toUpperCase() + splitted[1].slice(1);
       name = first + " " + second;
   } else {
-      name = username[0].toUpperCase() + username.slice(1);
+      name = splitted[0][0].toUpperCase() + splitted[0].slice(1);
   };
 console.log(name);
   const style = {
