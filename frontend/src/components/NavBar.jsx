@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 
 const NavBar = () => {
   const [darkMode, setDarkMode] = useState(() => {
-    // Get dark mode preference from localStorage on initial load
     const savedDarkMode = localStorage.getItem("darkMode");
     return savedDarkMode ? JSON.parse(savedDarkMode) : false;
   });
@@ -12,11 +11,8 @@ const NavBar = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Apply dark mode styles
     document.body.style.backgroundColor = darkMode ? "#282828" : "white";
     document.body.style.color = darkMode ? "white" : "black";
-    
-    // Save dark mode preference to localStorage
     localStorage.setItem("darkMode", JSON.stringify(darkMode));
   }, [darkMode]);
 
@@ -32,7 +28,7 @@ const NavBar = () => {
   return (
     <nav className="navbar navbar-expand-lg" style={{backgroundColor: 'black'}}>
       <div className="container-fluid">
-        <a className="navbar-brand text-white" href="#">Notepad</a>
+        <NavLink  className="navbar-brand text-white" to='/home'>Notepad</NavLink>
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
           <span className="navbar-toggler-icon"></span>
         </button>
