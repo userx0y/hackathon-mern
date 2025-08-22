@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
-import posterFile from '../assets/space_poster.jpeg';
+import backgroundVideo from "../assets/background.mp4";
+import backgroundPoster from "../assets/background_image.jpg"
 import VanillaTilt from 'vanilla-tilt';
 import Button from '../Button';
 import Confetti from 'react-confetti';
@@ -90,10 +91,10 @@ const Login = () => {
           autoPlay 
           muted 
           playsInline 
-          loop 
-          poster={posterFile} 
+          loop
+          poster={backgroundPoster}
           style={{height: '100%', width: '100%', objectFit: 'cover', position: 'absolute', zIndex: '1'}} 
-          src='../public/assets/ezgif.mp4'
+          src={backgroundVideo}
         ></video>
         
         <div style={{
@@ -112,6 +113,7 @@ const Login = () => {
               padding: '2rem', 
               maxWidth: '400px', 
               backgroundColor: 'rgba(255, 255, 255, 0.15)',
+              borderRadius: '20px',
               backdropFilter: 'blur(10px)', 
               width: '90%', 
               border: '1px solid rgba(255, 255, 255, 0.2)', 

@@ -11,7 +11,7 @@ const Button = () => {
 
 const StyledWrapper = styled.div`
   input {
-    background: #1f6cfbff;
+    background: #d19f09ff;
     font-family: inherit;
     padding: 0.6em 1.3em;
     font-weight: 900;

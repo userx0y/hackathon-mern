@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { API_BASE } from "../config";
-import posterFile from '../assets/space_poster.jpeg';
+import backgroundVideo from '../assets/background.mp4';
+import backgroundPoster from "../assets/background_image.jpg"
 import VanillaTilt from 'vanilla-tilt';
 import Button from '../Button';
 import { NavLink } from 'react-router-dom';
@@ -48,9 +49,9 @@ const Registration = () => {
   return (
     <>
     <div className="container-fluid" style={{height: '100vh',padding: '0px 0px', position: 'relative'}}>
-        <video autoPlay muted playsInline loop poster={posterFile} style={{height:'100%', width: '100%', objectFit: 'cover', position: 'absolute', zIndex: '1'}} src='../public/assets/ezgif.mp4' ></video>
+        <video autoPlay muted playsInline loop poster={backgroundPoster} style={{height:'100%', width: '100%', objectFit: 'cover', position: 'absolute', zIndex: '1'}} src={backgroundVideo} ></video>
         <div style={{position: 'absolute', justifyContent: 'center', alignItems:'center', display: 'flex', zIndex: '2', height: '100%', width: '100%'}}>
-          <form onSubmit={handleOnSubmit} ref={tiltRef} style={{padding: '2rem', maxWidth: '400px', backgroundColor: 'rgba(255, 255, 255, 0.15)',backdropFilter: 'blur(10px)', width: '90%', border: '1px solid rgba(255, 255, 255, 0.2)', display: 'flex', justifyContent: 'center', flexDirection:'column'}}>
+          <form onSubmit={handleOnSubmit} ref={tiltRef} style={{padding: '2rem', maxWidth: '400px', backgroundColor: 'rgba(255, 255, 255, 0.15)',backdropFilter: 'blur(10px)', width: '90%',borderRadius: '20px' , border: '1px solid rgba(255, 255, 255, 0.2)', display: 'flex', justifyContent: 'center', flexDirection:'column'}}>
             <h1 className='text-white'>Sign up</h1>
             <br />
             <input type="text" className="form-control mb-3" placeholder="Name" value={Form.name} name='name' onChange={handleOnChange} />
