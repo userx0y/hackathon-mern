@@ -5,7 +5,7 @@ import mongoose from "mongoose";
 import userRoutes from "./routes/userRoutes.js";
 import noteRoutes from "./routes/noteRoutes.js";
 
-dotenv.config();
+dotenv.config({ path : "/etc/secrets/.env" });
 const app = express();
 app.use(cors());
 app.use(express.json());
