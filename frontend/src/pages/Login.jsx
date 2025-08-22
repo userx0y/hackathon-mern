@@ -4,6 +4,7 @@ import backgroundPoster from "../assets/background_image.jpg"
 import VanillaTilt from 'vanilla-tilt';
 import Button from '../Button';
 import Confetti from 'react-confetti';
+import { API_BASE } from '../config';
 import { NavLink, useNavigate } from 'react-router-dom';
 
 const Login = () => {
